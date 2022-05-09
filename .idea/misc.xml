@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_trip.xml" value="0.268" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24682971014492755" />
+        <entry key="app/src/main/res/layout/each_row.xml" value="0.24682971014492755" />
+        <entry key="app/src/main/res/layout/fragment_create_repo.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/fragment_repo_list.xml" value="0.25407608695652173" />
         <entry key="app/src/main/res/layout/fragment_signin.xml" value="0.25407608695652173" />
       </map>

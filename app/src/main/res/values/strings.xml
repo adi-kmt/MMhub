@@ -2,4 +2,6 @@
     <string name="app_name">MMhub</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_with_github">Login with github</string>
+    <string name="continue_with_github">Continue with GitHub</string>
 </resources>

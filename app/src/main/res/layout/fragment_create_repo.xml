@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CreateRepoFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.CreateRepoFragment"
+    android:background="@color/black">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/RepositoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="Repository Name"
+        android:textColorHint="@color/white"/>
 
-</FrameLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/RepositoryDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="Repository Description"
+        android:layout_below="@id/RepositoryName"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/white"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/PrivateSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/RepositoryDesc"
+        android:layout_marginTop="20dp"
+        android:text="Private?"
+        app:switchPadding="50dp"
+        android:textColor="@color/white"
+        android:buttonTint="@color/purple_200"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/TemplateSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/PrivateSwitch"
+        android:layout_marginTop="20dp"
+        android:text="Template?"
+        app:switchPadding="50dp"
+        android:textColor="@color/white"
+        android:buttonTint="@color/purple_200"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/CreateRepositoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TemplateSwitch"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Create Repository"
+        app:icon="@drawable/ic_baseline_check_24"/>
+
+</RelativeLayout>
