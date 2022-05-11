@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/ic_baseline_add" android:title="Create Repo" android:id="@+id/createRepoFragment"/>
+    <item android:icon="@drawable/ic_baseline_repo_list" android:title="Repositories" android:id="@+id/repoListFragment"/>
+</menu>

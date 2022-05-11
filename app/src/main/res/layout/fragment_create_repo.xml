@@ -7,47 +7,75 @@
     tools:context=".ui.CreateRepoFragment"
     android:background="@color/black">
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RepositoryName"
-        android:layout_width="wrap_content"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="Repository Name"
-        android:textColorHint="@color/white"/>
+        app:helperText="Required"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/white"
+        app:errorEnabled="true"
+        app:helperTextTextColor="@color/purple_200">
 
-    <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repository Name"
+            app:hintTextColor="@color/white"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RepositoryDesc"
-        android:layout_width="wrap_content"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="Repository Description"
         android:layout_below="@id/RepositoryName"
+        app:helperText="Required"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/white"
+        app:errorEnabled="true"
         android:layout_marginTop="20dp"
-        android:textColorHint="@color/white"/>
+        app:helperTextTextColor="@color/purple_200">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repository Description"
+            app:hintTextColor="@color/white"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/PrivateSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/RepositoryDesc"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:buttonTint="@color/purple_200"
         android:text="Private?"
-        app:switchPadding="50dp"
         android:textColor="@color/white"
-        android:buttonTint="@color/purple_200"/>
+        app:switchPadding="50dp" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/TemplateSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/PrivateSwitch"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:buttonTint="@color/purple_200"
         android:text="Template?"
-        app:switchPadding="50dp"
         android:textColor="@color/white"
-        android:buttonTint="@color/purple_200"/>
+        app:switchPadding="50dp" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -55,9 +83,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/TemplateSwitch"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:text="Create Repository"
-        app:icon="@drawable/ic_baseline_check_24"/>
+        app:icon="@drawable/ic_baseline_check_24" />
 
 </RelativeLayout>

@@ -1,21 +1,22 @@
 package com.example.domain.di
 
-import com.example.domain.repository.MainRepository
-import com.example.domain.usecases.CreateRepoUsecase
-import com.example.domain.usecases.GetReposUsecase
-import com.example.domain.usecases.UsecaseList
+import com.example.domain.repository.Repo
+import com.example.domain.usecases.GetAccessTokenUseCase
+import com.example.domain.usecases.GetRepoListUseCase
 import dagger.Module
 import dagger.Provides
-import jdk.jfr.internal.Repository
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
-@Singleton
-object InjectUsecase {
+@InstallIn(SingletonComponent::class)
+object InjectUserTokenUsecase {
 
     @Provides
-    fun providesUseCases(repository: MainRepository):UsecaseList = UsecaseList(
-        getReposUsecase = GetReposUsecase(repository),
-        createRepoUsecase = CreateRepoUsecase(repository)
-    )
+    fun providesUserTokenUseCase(repo: Repo):GetAccessTokenUseCase = GetAccessTokenUseCase(repo)
+
+    @Provides
+    fun provideRepoListUseCase(repo: Repo):GetRepoListUseCase = GetRepoListUseCase(repo)
 }
