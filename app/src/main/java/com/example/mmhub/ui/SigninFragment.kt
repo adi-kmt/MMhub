@@ -80,20 +80,6 @@ class SigninFragment : Fragment() {
                     }
                 }
         }
-
-
-//        binding.GithubLoginButton.setOnClickListener {
-//            if (loginVM.loggedin){
-//                findNavController().navigate(R.id.action_signinFragment_to_repoListFragment)
-//            }else{
-//                Toast.makeText(requireContext(), "Not logged in", Toast.LENGTH_LONG).show()
-//
-//                val completeURL = GithubRequired.AUTHURL + "?client_id=" + GithubRequired.CLIENT_ID + "&scope=" + GithubRequired.SCOPE + "&redirect_uri=" + GithubRequired.REDIRECT_URI + "&state=" + GithubRequired.STATE
-//                val intent = Intent(Intent.ACTION_VIEW)
-//                intent.setData(completeURL.toUri())
-//                startActivity(intent)
-//            }
-//        }
     }
 
 

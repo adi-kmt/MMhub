@@ -74,7 +74,6 @@ class CreateRepoFragment : Fragment() {
                         }
                     }
                 }else {
-//                    Toast.makeText(requireContext(), "Enter valid Repo name and Desc", Toast.LENGTH_LONG).show()
                     Log.d("empty", "Enter valid Repo name and Desc")
                 }
             }

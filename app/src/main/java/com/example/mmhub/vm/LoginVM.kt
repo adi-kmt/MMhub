@@ -26,15 +26,6 @@ private val datastore: PreferencesDatastore)
 
     val postStateFlow: StateFlow<UIState<Nothing?>> = _postStateFlow
 
-    /*
-    Create stateflow and fill, collect in other function and get data
-     */
-
-//    init {
-//        //at any state if user ui state is failure, log out user
-//        //collect toekn, then fetch use case
-//    }
-
     fun login(){
         viewModelScope.launch {
             _postStateFlow.emit(UIState.Loading)
@@ -42,9 +33,6 @@ private val datastore: PreferencesDatastore)
             if (token != null) {
                 Log.e("DS token", token)
             }
-//            token?.let{token ->
-//                _postStateFlow.emit(UIState.Success(null))
-//            }?: _postStateFlow.emit(UIState.Empty)
             if (token !="null"){
                 Log.e("Success VM", "why?")
                 _postStateFlow.emit(UIState.Success(null))

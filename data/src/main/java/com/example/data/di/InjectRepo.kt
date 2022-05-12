@@ -17,8 +17,6 @@ object InjectRepo {
 
     @Provides
     fun providesRepo(
-//        @Named("Unauth")
         apiService: ApiService,
-//        @Named("Auth")
         authorizedApiService: AuthorizedApiService):Repo = RepoImpl(apiService = apiService, authorizedApiService = authorizedApiService)
 }

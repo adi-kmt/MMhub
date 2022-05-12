@@ -19,9 +19,7 @@ import javax.inject.Named
 
 class RepoImpl
     @Inject constructor(
-//        @Named("Unauth")
         private val apiService: ApiService,
-//        @Named("Auth")
         private val authorizedApiService: AuthorizedApiService)
     :Repo {
     override suspend fun getUserAccessToken(
@@ -46,11 +44,8 @@ class RepoImpl
         try {
             val drepoResponse = authorizedApiService.getRepoList()
 
-//            Log.w("RepoList", drepoResponse.body().toString())
             drepoResponse.body()?.let { dRepoList ->
-//                Log.e("DRepoList", dRepoList.toString())
                 val repoData = dRepoList.map {dRepoData ->
-//                    Log.e("dRepo", "${dRepoData.name} ${dRepoData.stargazers_count} ${dRepoData.description} ${dRepoData.language}")
 
 
                     val data = RepoData(
@@ -59,15 +54,11 @@ class RepoImpl
                         dRepoData.description,
                         dRepoData.language,
                     )
-//                    Log.e("RepoedData", data.toString())
-//                    dRepoData.toRepoData()
                     data
                 }
-//                Log.e("RepoData", repoData.toString())
                 return NetworkState.Success(repoData)
             }?: return NetworkState.Failure(Exception("Empty Repo List received"))
         }catch (e:Exception){
-//            Log.e("RepoList Error", e.toString())
             return NetworkState.Failure(e)
         }
     }
