@@ -44,8 +44,10 @@ class SigninFragment : Fragment() {
         _binding = FragmentSigninBinding.bind(view)
 
 
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav_graph)
-        navBar.visibility = View.GONE
+        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
+        navBar?.visibility = View.GONE
+
+
         binding.GithubLoginButton.setOnClickListener {
             if (loginVM.loggedin){
                 findNavController().navigate(R.id.action_signinFragment_to_repoListFragment)

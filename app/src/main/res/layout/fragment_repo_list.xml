@@ -42,13 +42,5 @@
         android:visibility="visible"
         tools:listitem="@layout/repo_each_row" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/BottomNavView"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@id/Reposrv"
-        android:backgroundTint="@color/black"
-        app:menu="@menu/bottom_nav_menu" />
-
 
 </RelativeLayout>

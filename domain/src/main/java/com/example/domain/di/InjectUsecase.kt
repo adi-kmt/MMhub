@@ -1,6 +1,7 @@
 package com.example.domain.di
 
 import com.example.domain.repository.Repo
+import com.example.domain.usecases.CreateRepoUseCase
 import com.example.domain.usecases.GetAccessTokenUseCase
 import com.example.domain.usecases.GetRepoListUseCase
 import dagger.Module
@@ -19,4 +20,7 @@ object InjectUserTokenUsecase {
 
     @Provides
     fun provideRepoListUseCase(repo: Repo):GetRepoListUseCase = GetRepoListUseCase(repo)
+
+    @Provides
+    fun providesCreateRepoUseCase(repo: Repo) = CreateRepoUseCase(repo)
 }

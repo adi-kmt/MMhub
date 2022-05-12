@@ -19,12 +19,12 @@ import javax.inject.Inject
 class LoginVM @Inject constructor(private val getAccessTokenUseCase: GetAccessTokenUseCase,
 private val datastore: PreferencesDatastore)
     :ViewModel() {
-    var loggedin = false
+    var loggedin = true
 
-    private val _postStateFlow: MutableStateFlow<UIState<Nothing>> =
+    private val _postStateFlow: MutableStateFlow<UIState<Nothing?>> =
         MutableStateFlow(UIState.Empty)
 
-    val postStateFlow: StateFlow<UIState<Nothing>> = _postStateFlow
+    val postStateFlow: StateFlow<UIState<Nothing?>> = _postStateFlow
 
     /*
     Create stateflow and fill, collect in other function and get data
@@ -40,7 +40,7 @@ private val datastore: PreferencesDatastore)
 //            _postStateFlow.emit(UIState.Loading)
 //            val token = null
 //            token?.let{token ->
-//                _postStateFlow.emit(UIState.Success(data = ))
+//                _postStateFlow.emit(UIState.Success(data =null))
 //            }?: startLoginProcess(code)
 //        }
 //    }

@@ -9,7 +9,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RepositoryName"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,11 +17,13 @@
         app:endIconMode="clear_text"
         app:endIconTint="@color/white"
         app:errorEnabled="true"
+        android:layout_marginTop="25dp"
         app:helperTextTextColor="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:hint="Repository Name"
             app:hintTextColor="@color/white"
             />
@@ -31,7 +32,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RepositoryDesc"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -47,6 +47,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:hint="Repository Description"
             app:hintTextColor="@color/white"
             />

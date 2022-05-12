@@ -7,14 +7,14 @@
     tools:context=".ui.MainActivity">
 
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav_graph"
+        android:id="@+id/bottom_nav_view"
         style="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/fragmentContainerView"
-        app:menu="@menu/bottom_nav_menu"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        app:menu="@menu/bottom_nav_menu" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"

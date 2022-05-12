@@ -12,38 +12,46 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.RepoData
 import com.example.mmhub.R
 import com.example.mmhub.RepoListAdapter
-import com.example.mmhub.databinding.FragmentSigninBinding
+import com.example.mmhub.databinding.FragmentRepoListBinding
 import com.example.mmhub.vm.LoginVM
 import com.example.mmhub.vm.RepoListVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RepoListFragment : Fragment() {
-//    private var _binding:? = null
-//    private val binding get() = _binding!!
+    private var _binding:FragmentRepoListBinding?= null
+    private val binding get() = _binding!!
+
+
+
 
     lateinit var postAdapter: RepoListAdapter
 
     private val repoListVM:RepoListVM by viewModels()
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        _binding = FragmentRepoListBinding.inflate(inflater, container, false)
-//        return _binding!!.root
-//    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentRepoListBinding.inflate(inflater, container, false)
+        return _binding!!.root
+    }
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        _binding = FragmentRepoListBinding.bind(view)
+        _binding = FragmentRepoListBinding.bind(view)
 
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav_graph)
-        navBar.visibility = View.VISIBLE
+        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
+        navBar?.visibility = View.VISIBLE
+
+        repoListVM.repoList()
 
 //        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 //            repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -86,18 +94,18 @@ class RepoListFragment : Fragment() {
 //        }
     }
 
-//
+
 //        private fun initRV() {
-//        postAdapter = RepoListAdapter(ArrayList())
+//        postAdapter = RepoListAdapter(emptyList<RepoData>())
 //        binding.Reposrv.apply {
 //            layoutManager = LinearLayoutManager(requireContext())
 //            adapter = postAdapter
 //        }
 //    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//
-//        _binding = null
-//    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
+    }
 }

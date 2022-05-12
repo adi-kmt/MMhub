@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -21,24 +22,18 @@ import javax.inject.Named
 object InjectApi {
 
     @Provides
-    @Named("Unauth")
+//    @Named("Unauth")
     fun providesApi(): ApiService =
         Retrofit.Builder().baseUrl(GithubRequired.TOKENURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
 
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-object AuthApi {
-#
+//    @Named("Auth")
     @Provides
-    @Named("Auth")
-    suspend fun providesAuthApi(preferencesDatastore: PreferencesDatastore): AuthorizedApiService {
-        val accessToken = preferencesDatastore.readData("access_token")
+    fun providesAuthApi(preferencesDatastore: PreferencesDatastore): AuthorizedApiService {
         val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(Interceptor { chain ->
+            val accessToken = runBlocking { preferencesDatastore.readData("access_token") }
             val newRequest: Request = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer $accessToken")
                 .build()
