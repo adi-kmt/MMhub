@@ -9,7 +9,7 @@ import com.example.domain.model.RepoData
 import com.example.mmhub.databinding.RepoEachRowBinding
 
 
-class RepoListAdapter(private val repoData: RepoData): ListAdapter<RepoData, RepoListAdapter.RepoListHolder>(DiffCall()){
+class RepoListAdapter: ListAdapter<RepoData, RepoListAdapter.RepoListHolder>(DiffCall()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListHolder {
         val binding = RepoEachRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,10 +28,9 @@ class RepoListAdapter(private val repoData: RepoData): ListAdapter<RepoData, Rep
                 RepoName.text = repoData.name
                 RepoStars.text = repoData.stars.toString()
                 RepoDesc.text = repoData.description.toString()
-                RepoLang.text = repoData.language
+                RepoLang.text = repoData.language.toString()
             }
         }
-
     }
     class DiffCall:DiffUtil.ItemCallback<RepoData>() {
         override fun areItemsTheSame(oldItem: RepoData, newItem: RepoData): Boolean =
@@ -40,6 +39,4 @@ class RepoListAdapter(private val repoData: RepoData): ListAdapter<RepoData, Rep
         override fun areContentsTheSame(oldItem: RepoData, newItem: RepoData): Boolean =
             oldItem == newItem
     }
-
-
 }

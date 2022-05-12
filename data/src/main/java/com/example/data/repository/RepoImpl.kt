@@ -1,6 +1,7 @@
 package com.example.data.repository
 
 import android.util.Log
+import android.util.Log.ASSERT
 import com.example.data.api.ApiService
 import com.example.data.api.AuthorizedApiService
 import com.example.data.model.DAccessToken
@@ -45,27 +46,28 @@ class RepoImpl
         try {
             val drepoResponse = authorizedApiService.getRepoList()
 
-            Log.e("RepoList", drepoResponse.body().toString())
+//            Log.w("RepoList", drepoResponse.body().toString())
             drepoResponse.body()?.let { dRepoList ->
-                Log.e("DRepoList", dRepoList.toString())
-                val repoData:List<RepoData>  = dRepoList.map {dRepoData ->
-                    Log.e("dRepo", "${dRepoData.name}, ${dRepoData.stargazers_count} ${dRepoData.language} ${dRepoData.description}")
+//                Log.e("DRepoList", dRepoList.toString())
+                val repoData = dRepoList.map {dRepoData ->
+//                    Log.e("dRepo", "${dRepoData.name} ${dRepoData.stargazers_count} ${dRepoData.description} ${dRepoData.language}")
 
 
                     val data = RepoData(
                         dRepoData.name,
                         dRepoData.stargazers_count,
+                        dRepoData.description,
                         dRepoData.language,
-                        dRepoData.description.toString()
                     )
-                    Log.e("RepoData", data.toString())
-                    dRepoData.toRepoData()
+//                    Log.e("RepoedData", data.toString())
+//                    dRepoData.toRepoData()
+                    data
                 }
-                Log.e("RepoData", repoData.toString())
+//                Log.e("RepoData", repoData.toString())
                 return NetworkState.Success(repoData)
             }?: return NetworkState.Failure(Exception("Empty Repo List received"))
         }catch (e:Exception){
-            Log.e("RepoList Error", e.toString())
+//            Log.e("RepoList Error", e.toString())
             return NetworkState.Failure(e)
         }
     }

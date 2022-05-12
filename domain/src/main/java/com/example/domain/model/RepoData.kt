@@ -4,5 +4,5 @@ data class RepoData(
     val name:String,
     val stars:Int,
     val description:Any?="Null",
-    val language:String
+    val language:Any?
 )

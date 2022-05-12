@@ -2,6 +2,7 @@ package com.example.mmhub.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import com.example.domain.model.RepoData
 import com.example.mmhub.R
 import com.example.mmhub.RepoListAdapter
 import com.example.mmhub.databinding.FragmentRepoListBinding
-import com.example.mmhub.vm.LoginVM
 import com.example.mmhub.vm.RepoListVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,10 +26,6 @@ class RepoListFragment : Fragment() {
     private var _binding:FragmentRepoListBinding?= null
     private val binding get() = _binding!!
 
-
-
-
-    lateinit var postAdapter: RepoListAdapter
 
     private val repoListVM:RepoListVM by viewModels()
 
@@ -53,55 +49,51 @@ class RepoListFragment : Fragment() {
 
         repoListVM.repoList()
 
-//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                repoListVM.repoList.collect { state ->
-//                    when (state) {
-//                        is UIState.Success -> {
-//                            binding.apply {
-//                                Reposrv.isVisible = false
-//                                progressbar.isVisible = true
-//                                EmptyTv.isVisible = false
-//
-//                                postAdapter.setData(uiState.data)
-//                            }
-//                        }
-//                        is UIState.Loading ->{
-//                            binding.apply {
-//                                Reposrv.isVisible = false
-//                                progressbar.isVisible = true
-//                                EmptyTv.isVisible = false
-//                            }
-//                        }
-//                        is UIState.Empty -> {
-//                            binding.apply {
-//                                Reposrv.isVisible = false
-//                                progressbar.isVisible = false
-//                                EmptyTv.isVisible = true
-//                            }
-//                        }
-//                        is UIState.Failure -> {
-//                            binding.apply {
-//                                Reposrv.isVisible = false
-//                                progressbar.isVisible = false
-//                                EmptyTv.isVisible = true
-//                            }
-//                        }
-//                    }
-//
-//                }
-//            }
-//        }
+        val postAdapter= RepoListAdapter()
+        binding.Reposrv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = postAdapter
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repoListVM.repoList.collect { state ->
+                    when (state) {
+                        is UIState.Success -> {
+                            binding.apply {
+                                Reposrv.isVisible = true
+                                progressbar.isVisible = false
+                                EmptyTv.isVisible = false
+                                postAdapter.submitList(state.data)
+                            }
+                        }
+                        is UIState.Loading ->{
+                            binding.apply {
+                                Reposrv.isVisible = false
+                                progressbar.visibility = View.VISIBLE
+                                EmptyTv.isVisible = false
+                            }
+                        }
+                        is UIState.Empty -> {
+                            binding.apply {
+                                Reposrv.isVisible = false
+                                progressbar.isVisible = false
+                                EmptyTv.isVisible = true
+                            }
+                        }
+                        is UIState.Failure -> {
+                            binding.apply {
+                                Reposrv.isVisible = false
+                                progressbar.isVisible = false
+                                EmptyTv.isVisible = true
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     }
-
-
-//        private fun initRV() {
-//        postAdapter = RepoListAdapter(emptyList<RepoData>())
-//        binding.Reposrv.apply {
-//            layoutManager = LinearLayoutManager(requireContext())
-//            adapter = postAdapter
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

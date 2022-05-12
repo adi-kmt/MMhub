@@ -26,22 +26,20 @@ class RepoListVM
 
     val repoList: StateFlow<UIState<List<RepoData>>> = _repoList
 
-        fun repoList(){
-            viewModelScope.launch(Dispatchers.IO){
-        val items = getRepoListUseCase.getRepoList()
-        Log.e("Repos recieved", items.toString())
-    }
-//                when(val items = getRepoListUseCase.getRepoList()){
-//                    is NetworkState.Success ->{
-//                        _repoList.emit(UIState.Loading)
-//                        _repoList.emit(UIState.Success(items.data))
-//                    }
-//                    is NetworkState.Failure -> {
-//                        _repoList.emit(UIState.Loading)
-//                        _repoList.emit(UIState.Failure(items.exception))
-//                    }
-//                }
+        fun repoList() {
+            viewModelScope.launch(Dispatchers.IO) {
+                when (val items = getRepoListUseCase.getRepoList()) {
+                    is NetworkState.Success -> {
+                        _repoList.emit(UIState.Loading)
+                        Log.e("Repo list to emit", items.data.toString())
+                        _repoList.emit(UIState.Success(items.data))
+                    }
+                    is NetworkState.Failure -> {
+                        _repoList.emit(UIState.Loading)
+                        _repoList.emit(UIState.Failure(items.exception))
+                    }
+                }
+            }
         }
-
 
 }
