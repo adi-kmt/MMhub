@@ -1,5 +1,6 @@
 package com.example.mmhub.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,9 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.mmhub.GithubRequired
 import com.example.mmhub.R
@@ -18,6 +22,8 @@ import com.example.mmhub.vm.LoginVM
 import com.example.mmhub.databinding.FragmentSigninBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -38,6 +44,7 @@ class SigninFragment : Fragment() {
     }
 
 
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,24 +54,53 @@ class SigninFragment : Fragment() {
         val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
         navBar?.visibility = View.GONE
 
-
+        loginVM.login()
         binding.GithubLoginButton.setOnClickListener {
-            if (loginVM.loggedin){
-                findNavController().navigate(R.id.action_signinFragment_to_repoListFragment)
-            }else{
-                Toast.makeText(requireContext(), "Not logged in", Toast.LENGTH_LONG).show()
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    loginVM.postStateFlow.collect{state ->
+                        when(state){
+                           is UIState.Success -> {
+                               Log.e("Success hit", "here")
+                               findNavController().navigate(R.id.action_signinFragment_to_repoListFragment)
+                           }
+                            is UIState.Loading -> Log.e("Signin Loading", "Loading data")
+                            is UIState.Empty -> {
+                                withContext(Dispatchers.Main){
+                                    val completeURL = GithubRequired.AUTHURL + "?client_id=" + GithubRequired.CLIENT_ID + "&scope=" + GithubRequired.SCOPE + "&redirect_uri=" + GithubRequired.REDIRECT_URI + "&state=" + GithubRequired.STATE
+                                    val intent = Intent(Intent.ACTION_VIEW)
+                                    intent.setData(completeURL.toUri())
+                                    startActivity(intent)
+                                }
+                            }
+                            is UIState.Failure -> Log.e("Failed", state.exception.toString())
+                        }
+                    }
 
-                val completeURL = GithubRequired.AUTHURL + "?client_id=" + GithubRequired.CLIENT_ID + "&scope=" + GithubRequired.SCOPE + "&redirect_uri=" + GithubRequired.REDIRECT_URI + "&state=" + GithubRequired.STATE
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.setData(completeURL.toUri())
-                startActivity(intent)
-            }
+                    }
+                }
         }
+
+
+//        binding.GithubLoginButton.setOnClickListener {
+//            if (loginVM.loggedin){
+//                findNavController().navigate(R.id.action_signinFragment_to_repoListFragment)
+//            }else{
+//                Toast.makeText(requireContext(), "Not logged in", Toast.LENGTH_LONG).show()
+//
+//                val completeURL = GithubRequired.AUTHURL + "?client_id=" + GithubRequired.CLIENT_ID + "&scope=" + GithubRequired.SCOPE + "&redirect_uri=" + GithubRequired.REDIRECT_URI + "&state=" + GithubRequired.STATE
+//                val intent = Intent(Intent.ACTION_VIEW)
+//                intent.setData(completeURL.toUri())
+//                startActivity(intent)
+//            }
+//        }
     }
+
+
 
     override fun onResume() {
         super.onResume()
-
+        Log.e("On resume", "Already hit")
         val uri: Uri? = activity?.intent?.data
         if (uri != null && uri.toString().startsWith(GithubRequired.REDIRECT_URI)){
             Log.e("URI", uri.getQueryParameter("code").toString())

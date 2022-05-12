@@ -19,7 +19,7 @@ import javax.inject.Inject
 class LoginVM @Inject constructor(private val getAccessTokenUseCase: GetAccessTokenUseCase,
 private val datastore: PreferencesDatastore)
     :ViewModel() {
-    var loggedin = true
+//    var loggedin = true
 
     private val _postStateFlow: MutableStateFlow<UIState<Nothing?>> =
         MutableStateFlow(UIState.Empty)
@@ -35,15 +35,27 @@ private val datastore: PreferencesDatastore)
 //        //collect toekn, then fetch use case
 //    }
 
-//    fun login(code: String){
-//        viewModelScope.launch {
-//            _postStateFlow.emit(UIState.Loading)
-//            val token = null
+    fun login(){
+        viewModelScope.launch {
+            _postStateFlow.emit(UIState.Loading)
+            val token = datastore.readData("access_token")
+            if (token != null) {
+                Log.e("DS token", token)
+            }
 //            token?.let{token ->
-//                _postStateFlow.emit(UIState.Success(data =null))
-//            }?: startLoginProcess(code)
-//        }
-//    }
+//                _postStateFlow.emit(UIState.Success(null))
+//            }?: _postStateFlow.emit(UIState.Empty)
+            if (token !="null"){
+                Log.e("Success VM", "why?")
+                _postStateFlow.emit(UIState.Success(null))
+            }else{
+                Log.e("Empty hit", "Correctly")
+                _postStateFlow.emit(UIState.Empty)
+            }
+
+//            startLoginProcess(code)
+        }
+    }
 
     fun startLoginProcess(code:String){
 
@@ -51,16 +63,12 @@ private val datastore: PreferencesDatastore)
             when(val token = getAccessTokenUseCase.getUserAccessToken(code = code)){
                 is NetworkState.Failure ->{
                     Log.e("Login", token.exception.toString())
-
+                    _postStateFlow.emit(UIState.Failure(Exception("Unable to get key")))
                 }
                 is NetworkState.Success -> {
                     Log.e("Login", "" + token.data.access_token)
                     datastore.saveData("access_token", token.data.access_token)
-
-//                    val token = datastore.readData("access_token")
-//                    if (token != null) {
-//                        Log.e("DataStore Token", token)
-//                    }
+                    _postStateFlow.emit(UIState.Success(null))
                 }
             }
         }
