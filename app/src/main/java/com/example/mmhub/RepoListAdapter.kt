@@ -27,7 +27,7 @@ class RepoListAdapter(private val repoData: RepoData): ListAdapter<RepoData, Rep
             binding.apply {
                 RepoName.text = repoData.name
                 RepoStars.text = repoData.stars.toString()
-                RepoDesc.text = repoData.description
+                RepoDesc.text = repoData.description.toString()
                 RepoLang.text = repoData.language
             }
         }

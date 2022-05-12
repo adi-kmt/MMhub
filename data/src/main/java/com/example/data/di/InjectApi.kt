@@ -22,14 +22,12 @@ import javax.inject.Named
 object InjectApi {
 
     @Provides
-//    @Named("Unauth")
     fun providesApi(): ApiService =
         Retrofit.Builder().baseUrl(GithubRequired.TOKENURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
 
-//    @Named("Auth")
     @Provides
     fun providesAuthApi(preferencesDatastore: PreferencesDatastore): AuthorizedApiService {
         val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(Interceptor { chain ->

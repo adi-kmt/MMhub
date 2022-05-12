@@ -47,12 +47,25 @@ class RepoImpl
 
             Log.e("RepoList", drepoResponse.body().toString())
             drepoResponse.body()?.let { dRepoList ->
-                val repoData  = dRepoList.map {dRepoData ->
+                Log.e("DRepoList", dRepoList.toString())
+                val repoData:List<RepoData>  = dRepoList.map {dRepoData ->
+                    Log.e("dRepo", "${dRepoData.name}, ${dRepoData.stargazers_count} ${dRepoData.language} ${dRepoData.description}")
+
+
+                    val data = RepoData(
+                        dRepoData.name,
+                        dRepoData.stargazers_count,
+                        dRepoData.language,
+                        dRepoData.description.toString()
+                    )
+                    Log.e("RepoData", data.toString())
                     dRepoData.toRepoData()
                 }
+                Log.e("RepoData", repoData.toString())
                 return NetworkState.Success(repoData)
             }?: return NetworkState.Failure(Exception("Empty Repo List received"))
         }catch (e:Exception){
+            Log.e("RepoList Error", e.toString())
             return NetworkState.Failure(e)
         }
     }

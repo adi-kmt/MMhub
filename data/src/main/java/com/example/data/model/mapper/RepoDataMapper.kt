@@ -7,5 +7,5 @@ fun DRepoData.toRepoData() = RepoData(
     name = name,
     stars = stargazers_count,
     language = language,
-    description = description.toString()
+    description = description
 )
