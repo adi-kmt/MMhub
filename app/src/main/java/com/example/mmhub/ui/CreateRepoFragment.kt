@@ -50,8 +50,8 @@ class CreateRepoFragment : Fragment() {
 
         _binding = FragmentCreateRepoBinding.bind(view)
 
-        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
-        navBar?.visibility = View.VISIBLE
+//        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
+//        navBar?.visibility = View.VISIBLE
 
         binding.CreateRepositoryButton.setOnClickListener {
             binding.apply {

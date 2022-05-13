@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        navController = navHostFragment.findNavController()
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewMain) as NavHostFragment
+//        navController = navHostFragment.findNavController()
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNav.setupWithNavController(navController)
+//        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+//        bottomNav.setupWithNavController(navController)
     }
 }

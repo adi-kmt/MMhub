@@ -11,27 +11,14 @@
         android:label="fragment_signin"
         tools:layout="@layout/fragment_signin" >
         <action
-            android:id="@+id/action_signinFragment_to_repoListFragment"
-            app:destination="@id/navigation"
+            android:id="@+id/action_signinFragment_to_landingFragment"
+            app:destination="@id/landingFragment"
             app:popUpTo="@id/signinFragment"
             app:popUpToInclusive="true" />
     </fragment>
-
-    <navigation android:id="@+id/navigation"
-        app:startDestination="@id/repoListFragment">
-        <fragment
-            android:id="@+id/repoListFragment"
-            android:name="com.example.mmhub.ui.RepoListFragment"
-            android:label="fragment_repo_list"
-            tools:layout="@layout/fragment_repo_list">
-            <action
-                android:id="@+id/action_repoListFragment_to_createRepoFragment2"
-                app:destination="@id/createRepoFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/createRepoFragment"
-            android:name="com.example.mmhub.ui.CreateRepoFragment"
-            android:label="fragment_create_repo"
-            tools:layout="@layout/fragment_create_repo" />
-    </navigation>
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.example.mmhub.ui.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/fragment_landing" />
 </navigation>

@@ -51,8 +51,8 @@ class SigninFragment : Fragment() {
         _binding = FragmentSigninBinding.bind(view)
 
 
-        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
-        navBar?.visibility = View.GONE
+//        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
+//        navBar?.visibility = View.GONE
 
         loginVM.login()
         binding.GithubLoginButton.setOnClickListener {
@@ -62,7 +62,10 @@ class SigninFragment : Fragment() {
                         when(state){
                            is UIState.Success -> {
                                Log.e("Success hit", "here")
-                               findNavController().navigate(R.id.action_signinFragment_to_repoListFragment)
+//                               val navhost = childFragmentManager.findFragmentById(R.id.fragmentContainerView2)
+//                               val navcontroller = navhost?.findNavController()
+//                               navcontroller?.navigate(R.id.action_signinFragment_to_repoListFragment)
+                               findNavController().navigate(R.id.action_signinFragment_to_landingFragment)
                            }
                             is UIState.Loading -> Log.e("Signin Loading", "Loading data")
                             is UIState.Empty -> {

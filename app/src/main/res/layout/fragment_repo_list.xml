@@ -42,5 +42,4 @@
         android:visibility="visible"
         tools:listitem="@layout/repo_each_row" />
 
-
 </RelativeLayout>

@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.model.RepoData
 import com.example.mmhub.R
@@ -43,9 +45,6 @@ class RepoListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentRepoListBinding.bind(view)
-
-        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_nav_view)
-        navBar?.visibility = View.VISIBLE
 
         repoListVM.repoList()
 
