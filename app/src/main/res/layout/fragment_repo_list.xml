@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RepoListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.RepoListFragment"
+    android:background="@color/black">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/RepoHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Repositories"
+        android:textColor="@color/white"
+        android:textSize="40sp"/>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/EmptyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="368dp"
+        android:layout_marginBottom="712dp"
+        android:text="Empty!"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Reposrv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@id/RepoHeading"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        tools:listitem="@layout/repo_each_row" />
 
-</FrameLayout>
+</RelativeLayout>
